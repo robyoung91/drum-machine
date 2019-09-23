@@ -8,20 +8,23 @@ class App extends Component {
     this.state = {
 
     }
+
+    this.audioRef = React.createRef();
+  }
+
+  handleClick = () => {
+    console.log(this.audioRef);
   }
   render() {
+    const letters = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
+    const DrumPads = letters.map(x => (<div>
+      <audio className='clip' src={"./sounds/" + x + ".aif"} id={x} ref={this.audioRef} onClick={this.handleClick} key={x}></audio>
+    </div>));
+
     return (
       <div id='drum-machine'>
         <div id='display'>
-          <DrumPad className='drum-pad' letter='Q' />
-          <DrumPad className='drum-pad' letter='W' />
-          <DrumPad className='drum-pad' letter='E' />
-          <DrumPad className='drum-pad' letter='A' />
-          <DrumPad className='drum-pad' letter='S' />
-          <DrumPad className='drum-pad' letter='D' />
-          <DrumPad className='drum-pad' letter='Z' />
-          <DrumPad className='drum-pad' letter='X' />
-          <DrumPad className='drum-pad' letter='C' />
+          {DrumPads}
         </div>
       </div>
     );
