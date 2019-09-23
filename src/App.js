@@ -13,12 +13,14 @@ class App extends Component {
   }
 
   handleClick = () => {
-    console.log(this.audioRef);
+    console.log(this.audioRef.current);
+    this.audioRef.current.play();
   }
   render() {
     const letters = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
     const DrumPads = letters.map(x => (<div>
-      <audio className='clip' src={"./sounds/" + x + ".aif"} id={x} ref={this.audioRef} onClick={this.handleClick} key={x}></audio>
+      <audio className='clip' src={"./sounds/" + x + ".aif"} id={x} ref={this.audioRef} key={x} />
+      <button onClick={this.handleClick}>{x}</button>
     </div>));
 
     return (
