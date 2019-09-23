@@ -1,27 +1,85 @@
 import React, { Component } from 'react';
-import DrumPad from './DrumPad.js';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
 
-    }
-
-    this.audioRef = React.createRef();
+    };
   }
 
-  handleClick = () => {
-    console.log(this.audioRef.current);
-    this.audioRef.current.play();
+  handleClick = (refID) => {
+    console.log(this[refID]);
+    this[refID].play();
   }
+
   render() {
-    const letters = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
-    const DrumPads = letters.map(x => (<div>
-      <audio className='clip' src={"./sounds/" + x + ".aif"} id={x} ref={this.audioRef} key={x} />
-      <button onClick={this.handleClick}>{x}</button>
-    </div>));
+    const audioFiles = [
+      {
+        key: 'Q',
+        url: 'https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/LO%20FI%20and%208%20BIT%20KITS/8%20Bit%20Videogame%20Kit/10[kb]8bitkit-bounce-2.wav.mp3',
+        keyCode: 81,
+      },
+      {
+        key: 'W',
+        url: 'https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/LO%20FI%20and%208%20BIT%20KITS/8%20Bit%20Videogame%20Kit/76[kb]8bitkit-bounce.wav.mp3',
+        keyCode: 87,
+      },
+      {
+        key: 'E',
+        url: 'https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/LO%20FI%20and%208%20BIT%20KITS/8%20Bit%20Videogame%20Kit/15[kb]8bitkit-coin-10.wav.mp3',
+        keyCode: 69,
+      },
+      {
+        key: 'A',
+        url: 'https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/LO%20FI%20and%208%20BIT%20KITS/8%20Bit%20Videogame%20Kit/45[kb]8bitkit-coin-4.wav.mp3',
+        keyCode: 65,
+      },
+      {
+        key: 'S',
+        url: 'https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/LO%20FI%20and%208%20BIT%20KITS/8%20Bit%20Videogame%20Kit/62[kb]8bitkit-explosion-2.wav.mp3',
+        keyCode: 83,
+      },
+      {
+        key: 'D',
+        url: 'https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/LO%20FI%20and%208%20BIT%20KITS/8%20Bit%20Videogame%20Kit/13[kb]8bitkit-jump-3.wav.mp3',
+        keyCode: 68,
+      },
+      {
+        key: 'Z',
+        url: 'https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/LO%20FI%20and%208%20BIT%20KITS/8%20Bit%20Videogame%20Kit/29[kb]8bitkit-jump-9.wav.mp3',
+        keyCode: 90,
+      },
+      {
+        key: 'X',
+        url: 'https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/LO%20FI%20and%208%20BIT%20KITS/8%20Bit%20Videogame%20Kit/4[kb]8bitkit-laser-2.wav.mp3',
+        keyCode: 88,
+      },
+      {
+        key: 'C',
+        url: 'https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/LO%20FI%20and%208%20BIT%20KITS/8%20Bit%20Videogame%20Kit/22[kb]8bitkit-powerup-7.wav.mp3',
+        keyCode: 67,
+      },
+    ];
+
+    const DrumPads = audioFiles.map((element, index) => 
+      (
+        <div key={element.key}>
+          <audio 
+            className='clip' 
+            src={element.url} 
+            type='audio/wav' 
+            id={element.key} 
+            ref={ ref => this[element.key] = ref } 
+          />
+          <button 
+            onClick={()=>{this.handleClick(element.key)}}>
+              {element.key}
+          </button>
+        </div>
+      )
+    );
 
     return (
       <div id='drum-machine'>
