@@ -7,22 +7,32 @@ class App extends Component {
     this.state = {
 
     };
-  }
+  };
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown);
+  };
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+  };
 
   handleClick = (ref) => {
     console.log(this[ref]);
+    this[ref].currentTime = 0;
     this[ref].play();
-  }
+  };
 
-  handleKeyDown = (keyCode, e) => {
-      console.log(e.charCodeAt());
-      console.log(keyCode);
-      if (e.charCode === keyCode) {
-        console.log('Hello!');
+  handleKeyDown = (e) => {
+      let audio = document.getElementById(e.key.toUpperCase());
+      if (audio) {
+        audio.currentTime = 0;
+        audio.play();
       }
-  }
+  };
 
   render() {
+    
     const audioFiles = [
       {
         key: 'Q',
@@ -81,7 +91,6 @@ class App extends Component {
             id={element.key} 
             key={element.keyCode}
             ref={ ref => this[element.key] = ref }
-            onKeyDown = {(e) => this.handleKeyDown(element.keyCode, e)} 
           />
           <button 
             onClick={()=>{this.handleClick(element.key)}}>
