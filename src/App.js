@@ -9,9 +9,17 @@ class App extends Component {
     };
   }
 
-  handleClick = (refID) => {
-    console.log(this[refID]);
-    this[refID].play();
+  handleClick = (ref) => {
+    console.log(this[ref]);
+    this[ref].play();
+  }
+
+  handleKeyDown = (keyCode, e) => {
+      console.log(e.charCodeAt());
+      console.log(keyCode);
+      if (e.charCode === keyCode) {
+        console.log('Hello!');
+      }
   }
 
   render() {
@@ -71,7 +79,9 @@ class App extends Component {
             src={element.url} 
             type='audio/wav' 
             id={element.key} 
-            ref={ ref => this[element.key] = ref } 
+            key={element.keyCode}
+            ref={ ref => this[element.key] = ref }
+            onKeyDown = {(e) => this.handleKeyDown(element.keyCode, e)} 
           />
           <button 
             onClick={()=>{this.handleClick(element.key)}}>
