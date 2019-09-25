@@ -81,9 +81,9 @@ class App extends Component {
       },
     ];
 
-    const DrumPads = audioFiles.map((element, index) => 
+    const drumPads = audioFiles.map((element, index) => 
       (
-        <div key={element.key}>
+        <div className='drumPad' key={element.key}>
           <audio 
             className='clip' 
             src={element.url} 
@@ -92,7 +92,7 @@ class App extends Component {
             key={element.keyCode}
             ref={ ref => this[element.key] = ref }
           />
-          <button 
+          <button id={element.key + '-button'}
             onClick={()=>{this.handleClick(element.key)}}>
               {element.key}
           </button>
@@ -103,7 +103,9 @@ class App extends Component {
     return (
       <div id='drum-machine'>
         <div id='display'>
-          {DrumPads}
+          <div id='drum-pads'>
+            {drumPads}
+          </div>
         </div>
       </div>
     );

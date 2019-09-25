@@ -2,21 +2,55 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#drum-machine, #display {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #09d3ac;
+#drum-machine {
+  height: 100vh;
+  width: 100vw;
+  background-color: grey;
+}
+
+#display {
+  display: flex;
+  border: 3px solid black;
+  padding: 30px;
+}
+
+#drum-pads {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.drumPad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  padding: 3px;
+}
+
+.drumPad > button {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  border: 1px solid black;
+  background-color: white;
+  color: green;
+  border-radius: 8px;
+  box-shadow: 4px 4px 2px black;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  background-color: red;
 }
