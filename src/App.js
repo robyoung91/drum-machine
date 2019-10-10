@@ -11,25 +11,46 @@ class App extends Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
+    document.addEventListener('keyup', this.handleKeyUp);
+    document.addEventListener('mouseup', this.handleMouseUp);
   };
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyDown);
+    document.removeEventListener('keyup', this.handleKeyUp);
+    document.removeEventListener('mouseup', this.handleMouseUp);
   };
 
   handleClick = (ref) => {
-    console.log(this[ref]);
     this[ref].currentTime = 0;
     this[ref].play();
   };
 
   handleKeyDown = (e) => {
       let audio = document.getElementById(e.key.toUpperCase());
+      let audioButton = document.getElementById(e.key.toUpperCase() + '-button');
       if (audio) {
         audio.currentTime = 0;
         audio.play();
+        audioButton.style['background-color'] = 'red';
       }
   };
+
+  handleMouseDown = (ref) => {
+    console.log(this[ref]);
+    this[ref].style['background-color'] = 'red';
+  };
+
+  handleMouseUp = (ref) => {
+  };
+
+
+  handleKeyUp = (e) => {
+    let audioButton = document.getElementById(e.key.toUpperCase() + '-button');
+      if (audioButton) {
+        audioButton.style['background-color'] = 'white';
+      }
+  }
 
   render() {
     
@@ -92,8 +113,12 @@ class App extends Component {
             key={element.keyCode}
             ref={ ref => this[element.key] = ref }
           />
-          <button id={element.key + '-button'}
-            onClick={()=>{this.handleClick(element.key)}}>
+          <button 
+            id={element.key + '-button'}
+            onClick={()=>{this.handleClick(element.key)}}
+            ref={ref => this[element.key + '-button'] = ref}
+            onMouseDown = {() => {this.handleMouseDown(element.key + '-button')}}
+            onMouseUp = {() => {this.handleMouseUp(element.key + '-button')}}>
               {element.key}
           </button>
         </div>
