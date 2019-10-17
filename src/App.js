@@ -202,6 +202,7 @@ class App extends Component {
 
     return (
       <div id='drum-machine'>
+        <h1>8-bit SFX<br/>Machine</h1>
         <div id='display'>
           <div id='drum-pads'>
             {drumPads}
@@ -212,6 +213,7 @@ class App extends Component {
             <button onClick={this.changeBank}>Bank {this.state.bank + 1}</button>
           </div>
         </div>
+        <footer>by Rob Young</footer>
       </div>
     );
   }
