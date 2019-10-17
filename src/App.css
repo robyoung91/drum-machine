@@ -29,6 +29,7 @@ h1 {
   border-radius: 8px;
   height: 40%;
   width: 40%;
+  max-width: 100vh;
   padding: 30px;
 }
 
